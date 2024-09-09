@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./thiep/xacnhan.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <title>THẮNG - NHUNG</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="container-wrapper">
+            <div class="box-form">
+                <img src="./thiep/anh/thamdu-07.png" alt="" class="img-form">
+                <form action="" name="tuan-my">
+                    <div class="feed-info">
+                        <label for="" class="in-fe">DÀNH CHÚT THỜI GIAN ĐỂ XÁC NHẬN THAM DỰ GIÚP <strong>TUẤN & MY</strong> NHÉ!</label>
+                    </div>
+        
+                    <div class="container-check">
+                        <input class="box-feed" type="radio" value="CÓ" id="yes" name="XÁC NHẬN">
+                        <label class="check-box" for="yes">
+                            <h3 class="til-check">CÓ</h3>
+                        </label>
+                        <input class="box-feed" type="radio" value="KHÔNG" id="no" name="XÁC NHẬN">
+                        <label class="check-box" for="no"> 
+                            <h3 class="til-check">KHÔNG</h3>
+                        </label>
+                        <input class="box-feed" type="radio" value="CÓ THỂ" id="can" name="XÁC NHẬN">
+                        <label class="check-box" for="can"> 
+                            <h3 class="til-check">CÓ THỂ</h3>
+                        </label>
+                    </div>
+        
+                    <div class="box-ten">
+                        <input required class="inp-ten" type="text"  name="TÊN" placeholder="Tên của bạn">
+                        <input required class="inp-ten" type="text" name="SĐT" placeholder="Số điện thoại" pattern="\d*" maxlength="10" inputmode="numeric" title="Chỉ được nhập số">
+                    </div>
+                    <div class="box-count">
+                        <label for="ten">
+                          <span class="check-ten">SỐ KHÁCH THAM DỰ</span>
+                      </label>
+                        <!-- <input required class="count-per" type="number"  name="SỐ KHÁCH" min="0" max="10"> -->
+                        <select class="count-per" name="SỐ KHÁCH">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                          </select>
+                    </div>
+                    <div class="wrapper">
+                        <button class="xacnhan" type="submit">XÁC NHẬN</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyjqowPQaXMGNuzZ9_bZzti4KwxFyo_NDc1zAhoJ7StnAluFU8GDnPFLn3n-XAVZaqd/exec';
+        const form = document.forms['tuan-my'];
+    
+        form.addEventListener('submit', e => {
+        e.preventDefault();
+        alert('CẢM ƠN BẠN ĐÃ PHẢN HỒI! Dữ liệu gửi về sẽ mất khoảng một vài giây, nhấn "OK" và đợi trang tự tải lại nhé <3'); // Hiển thị thông báo ngay lập tức khi nhấn submit
+        
+        // Gửi dữ liệu form đi
+        fetch(scriptURL, { 
+            method: 'POST', 
+            body: new FormData(form)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Nếu dữ liệu được gửi thành công, tải lại trang
+                setTimeout(() => {
+                    window.location.reload(); // Tải lại trang sau 0.5 giây
+                }, 100); // 0.5 giây
+            } else {
+                // Nếu gặp lỗi khi gửi dữ liệu
+                console.error('Error!', response);
+                alert('OPPS! Đã xảy ra lỗi');
+            }
+        })
+        .catch(error => {
+            // Xử lý lỗi nếu có
+            console.error('Error!', error.message);
+            alert('OPPS! Đã xảy ra lỗi: ' + error.message);
+        });
+    });
+    
+    </script>
+
+    <script src="./thiep/tony_nga.js"></script>
+</body>
+</html>
