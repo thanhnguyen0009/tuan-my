@@ -56,24 +56,30 @@
                 <img src="./thiep/anh/IMG_1101.GIF" alt="" class="img-top"></a>
 
                 <img src="./thiep/anh/T-M-04.png" alt="" class="img-top1">
-                <div class="box-btn">
-                    <div class="row">
-                        <!-- <button data-modal-target="modal1" class="btn-modal"><img src="./thiep/anh/qr-04.png" alt="" class="img-btn"></button> -->
-                        <button data-modal-target="modal2" class="btn-modal"><img src="./thiep/anh/thoigian-04.png" alt="" class="img-btn"></button>
-                        <a href="#" target="_blank">
-                            <img src="./thiep/anh/bando-04.png" alt="" class="img-btn"></a>
-                            <a href="./xacnhan.html" target="_blank" class="centered">
-                                <img src="./thiep/anh/xacnhan-04.png" alt="" class="img-btn"></a>
-                    </div>
+                    
+                <div class="row">
+                    <button data-modal-target="modal2" class="btn-modal"><img src="./thiep/anh/thoigian-06.png" alt="" class="img-btn"></button>
+                    <button data-modal-target="modal1" class="btn-modal"><img src="./thiep/anh/loichuc-06.png" alt="" class="img-btn"></button>
+                        <a href="./xacnhan.html" target="_blank" class="centered">
+                            <img src="./thiep/anh/xacnhan-04.png" alt="" class="img-btn1"></a>
                 </div>
-                
             </div>
-          
+        
             <div class="modal" id="modal1"> <!-- This is the background overlay -->
               <div class="modal-content"> <!-- This is the actual modal/popup box -->
                 <span class="modal-close">&times;</span>
-                <h1>QR CODE</h1>
-                <img src="./thiep/anh/qr-04.png" alt="" class="img-modal">
+                <h1>LỜI CHÚC</h1>
+                <div class="box-form">
+                    <form action="" name="loichuc-tuan-my">
+                        <div class="box-ten">
+                            <input required class="inp-ten" type="text"  name="TÊN" placeholder="Tên của bạn">
+                            <textarea name="LỜI CHÚC" class="inp-ten" rows="5" cols="30"  placeholder="Gửi lời chúc đến chúng mình"></textarea>
+                        </div>
+                        <div class="wrapper">
+                            <button class="xacnhan" type="submit">XÁC NHẬN</button>
+                        </div>
+                    </form>
+                </div>
               </div>
             </div>
             <div class="modal" id="modal2">
@@ -139,6 +145,38 @@
             modal.classList.add("modal-show");
         }
         }
+
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbynUqGoEIYbAlciu0OHUKDRVU--a140bjQNuBQV5_IOybWgmlOyVkoz2rCOkQ_MVAE/exec';
+        const form = document.forms['loichuc-tuan-my'];
+    
+        form.addEventListener('submit', e => {
+        e.preventDefault();
+        alert('CẢM ƠN BẠN ĐÃ PHẢN HỒI! Dữ liệu gửi về sẽ mất khoảng một vài giây, nhấn "OK" và đợi trang tự tải lại nhé <3'); // Hiển thị thông báo ngay lập tức khi nhấn submit
+        
+        // Gửi dữ liệu form đi
+        fetch(scriptURL, { 
+            method: 'POST', 
+            body: new FormData(form)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Nếu dữ liệu được gửi thành công, tải lại trang
+                setTimeout(() => {
+                    window.location.reload(); // Tải lại trang sau 0.5 giây
+                }, 100); // 0.5 giây
+            } else {
+                // Nếu gặp lỗi khi gửi dữ liệu
+                console.error('Error!', response);
+                alert('OPPS! Đã xảy ra lỗi');
+            }
+        })
+        .catch(error => {
+            // Xử lý lỗi nếu có
+            console.error('Error!', error.message);
+            alert('OPPS! Đã xảy ra lỗi: ' + error.message);
+        });
+    });
     </script>
 </body>
 </html>
